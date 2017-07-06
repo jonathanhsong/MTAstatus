@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 #import os only needed if outputing to local drive  
-import mtaDM
+from mtaDM import *
 
 page = requests.get("http://service.mta.info/ServiceStatus/status.html?widget=yes")
 page
@@ -21,27 +21,54 @@ for gService in css_soup.find_all('span', class_='subway_goodservice'):
 	#BS4 does not allow for next_parent
 	for trainName in upTwo.find_all('img', alt=True):
 			print(trainName['alt'], gService.text)
-
-trainNames = ['A C E Subway', '1 2 3 Subway']
-for name in trainName['alt']:
-	if name not in trainNames:
-		oneTrain_delay()
-		aceTrain_delay()
-		oneTrain_status()
-		aceTrain_status()
-	else:
-		continue 
-
+				
+'''			
+			aceTrain = ['A C E Subway']
+			for ACE in List:
+				if ACE not in aceTrain:
+					aceTrain_delay() 
+					#too many duplicate status errors
+					#aceTrain_status()
+				else:
+					continue 
+			
+			OneTwoThreeTrain = ['e1 2 3 Subway']			
+			for OneTwoThree in List:
+				if OneTwoThree not in OneTwoThreeTrain:
+					#oneTrain_status()
+					oneTrain_delay()
+				else:
+					continue	 
+'''
 #children/descendants returning something weird. Test method later
 for dService in css_soup.find_all('span', class_='subway_delays'): 
 	DupOne = dService.parent
 	DupTwo = DupOne.parent
 	for DtrainName in DupTwo.find_all('img', alt=True):
 			print(DtrainName['alt'], dService.text)
-
+			
+			dList = DtrainNamep['alt']		
+			if "A C E Subway" == dList:
+				aceTrain_delay()
+			else:
+				continue
+			if "1 2 3 Subway" == dList:
+				oneTrain_delay()
+			else:
+				continue 
 
 for pService in css_soup.find_all('span', class_='subway_plannedwork'): 
 	PupOne = pService.parent
 	PupTwo = PupOne.parent
 	for PtrainName in PupTwo.find_all('img', alt=True):
 			print(PtrainName['alt'], pService.text)
+
+			pList = PtrainName['alt']
+			if "A C E Subway" == pList:
+				aceTrain_delay()
+			else:	
+				continue
+			if "1 2 3 Subway" == pList:
+				oneTrain_delay()
+			else:
+				continue
