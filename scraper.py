@@ -21,25 +21,7 @@ for gService in css_soup.find_all('span', class_='subway_goodservice'):
 	#BS4 does not allow for next_parent
 	for trainName in upTwo.find_all('img', alt=True):
 			print(trainName['alt'], gService.text)
-				
-'''			
-			aceTrain = ['A C E Subway']
-			for ACE in List:
-				if ACE not in aceTrain:
-					aceTrain_delay() 
-					#too many duplicate status errors
-					#aceTrain_status()
-				else:
-					continue 
-			
-			OneTwoThreeTrain = ['e1 2 3 Subway']			
-			for OneTwoThree in List:
-				if OneTwoThree not in OneTwoThreeTrain:
-					#oneTrain_status()
-					oneTrain_delay()
-				else:
-					continue	 
-'''
+
 #children/descendants returning something weird. Test method later
 for dService in css_soup.find_all('span', class_='subway_delays'): 
 	DupOne = dService.parent
