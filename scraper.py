@@ -14,9 +14,9 @@ else:
 
 css_soup = BeautifulSoup(page.content, 'html.parser')
 #This finds the good service trains first
+
 for gService in css_soup.find_all('span', class_='subway_goodservice'): 
-	upOne = gService.parent
-	upTwo = upOne.parent
+	upTwo = gService.parent.parent
 	#Using parents ensures that the status and train are aligned
 	#BS4 does not allow for next_parent
 	for trainName in upTwo.find_all('img', alt=True):
@@ -24,33 +24,26 @@ for gService in css_soup.find_all('span', class_='subway_goodservice'):
 
 #children/descendants returning something weird. Test method later
 for dService in css_soup.find_all('span', class_='subway_delays'): 
-	DupOne = dService.parent
-	DupTwo = DupOne.parent
+	DupTwo = dService.parent.parent
 	for DtrainName in DupTwo.find_all('img', alt=True):
 			print(DtrainName['alt'], dService.text)
 			
 			dList = DtrainName['alt']		
 			if "A C E Subway" == dList:
-				aceTrain_delay()
-			else:
-				continue
-			if "1 2 3 Subway" == dList:
+				aceTrain_status()
+			elif "1 2 3 Subway " == dList:
 				oneTrain_delay()
 			else:
 				continue 
 
 for pService in css_soup.find_all('span', class_='subway_plannedwork'): 
-	PupOne = pService.parent
-	PupTwo = PupOne.parent
+	PupTwo = pService.parent.parent
 	for PtrainName in PupTwo.find_all('img', alt=True):
 			print(PtrainName['alt'], pService.text)
 
 			pList = PtrainName['alt']
-			if "A C E Subway" == pList:
-				aceTrain_delay()
-			else:	
-				continue
 			if "1 2 3 Subway" == pList:
-				oneTrain_delay()
-			else:
-				continue
+				oneTrain_planned()
+			elif "N Q R Subway" == pList:
+				aceTrain_planned()
+				break 
