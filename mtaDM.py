@@ -4,6 +4,17 @@ api = twitter.Api(consumer_key='',
 		  consumer_secret='',
 		  access_token_key='',
 		  access_token_secret='')
+from datetime import datetime, date, time
+'''
+Working on inputing a timestamp 
+dt = datetime.now()
+timeStamp = dt.strftime("%A. %B, %d %Y %I:%M%p")
+oneMsg = "1 2 3 Delays"
+oneDelayMsg = [timeStamp, oneMsg]
+print(oneDelayMsg)
+
+'''
+
 
 #Documentation is wrong. Text, receiver,
 def oneTrain_delay():
