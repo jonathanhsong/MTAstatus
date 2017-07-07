@@ -4,6 +4,7 @@ import re
 #import os only needed if outputing to local drive  
 from mtaDM import *
 
+
 page = requests.get("http://service.mta.info/ServiceStatus/status.html?widget=yes")
 page
 page.content
@@ -11,6 +12,8 @@ if page.status_code == 200:
 	print ("MTA Server Online") 
 else: 
 	print ("Server Error")
+
+
 
 css_soup = BeautifulSoup(page.content, 'html.parser')
 #This finds the good service trains first
@@ -30,9 +33,11 @@ for dService in css_soup.find_all('span', class_='subway_delays'):
 			
 			dList = DtrainName['alt']		
 			if "A C E Subway" == dList:
-				aceTrain_status()
-			elif "1 2 3 Subway " == dList:
+				#aceTrain_status()
+				aceTrain_delay()
+			elif "1 2 3 Subway" == dList:
 				oneTrain_delay()
+				#oneTrain_status()
 			else:
 				continue 
 
@@ -44,6 +49,10 @@ for pService in css_soup.find_all('span', class_='subway_plannedwork'):
 			pList = PtrainName['alt']
 			if "1 2 3 Subway" == pList:
 				oneTrain_planned()
-			elif "N Q R Subway" == pList:
+				oneTrain_status()
+			elif "A C E Subway" == pList:
 				aceTrain_planned()
+				aceTrain_status()
 				break 
+	
+			
