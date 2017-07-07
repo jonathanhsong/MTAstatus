@@ -29,7 +29,7 @@ for dService in css_soup.find_all('span', class_='subway_delays'):
 	for DtrainName in DupTwo.find_all('img', alt=True):
 			print(DtrainName['alt'], dService.text)
 			
-			dList = DtrainNamep['alt']		
+			dList = DtrainName['alt']		
 			if "A C E Subway" == dList:
 				aceTrain_delay()
 			else:
