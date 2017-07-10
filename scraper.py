@@ -33,11 +33,11 @@ for dService in css_soup.find_all('span', class_='subway_delays'):
 			
 			dList = DtrainName['alt']		
 			if "A C E Subway" == dList:
-				#aceTrain_status()
+				aceTrain_status()
 				aceTrain_delay()
-			elif "1 2 3 Subway" == dList:
-				oneTrain_delay()
-				#oneTrain_status()
+			elif "7 Subway" == dList:
+				#oneTrain_delay(dList['alt']);
+				oneTrain_status()
 			else:
 				continue 
 
@@ -54,5 +54,3 @@ for pService in css_soup.find_all('span', class_='subway_plannedwork'):
 				aceTrain_planned()
 				aceTrain_status()
 				break 
-	
-			
