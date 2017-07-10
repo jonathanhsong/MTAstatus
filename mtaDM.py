@@ -4,36 +4,33 @@ api = twitter.Api(consumer_key='',
 		  consumer_secret='',
 		  access_token_key='',
 		  access_token_secret='')
+
 from datetime import datetime, date, time
-'''
-Working on inputing a timestamp 
 dt = datetime.now()
 timeStamp = dt.strftime("%A. %B, %d %Y %I:%M%p")
 oneMsg = "1 2 3 Delays"
-oneDelayMsg = [timeStamp, oneMsg]
-print(oneDelayMsg)
-
-'''
-
+oneDelayMsg = [oneMsg, timeStamp]
+OnedatetimeString = ' '.join(oneDelayMsg)
+aceMsg = "A C E Delays"
+aceDelayMsg= [aceMsg, timeStamp]
+ACEdatetimeString = ' '.join(aceDelayMsg)
 
 #Documentation is wrong. Text, receiver,
 def oneTrain_delay():
-	api.PostDirectMessage('1 2 3 Delays', "user_id")
-
+	api.PostDirectMessage(OnedatetimeString, "1559767622")
 def oneTrain_planned():
-	api.PostDirectMessage('1 2 3 Planned work', "user_id")
+	api.PostDirectMessage(OnedatetimeString, "1559767622")
 
 
 def aceTrain_delay():
-	api.PostDirectMessage('A C E Delays', "user_id")	
+	api.PostDirectMessage(ACEdatetimeString, "1559767622")	
 
 def aceTrain_planned():
-	api.PostDirectMessage('A C E Planned work', "user_id")
+	api.PostDirectMessage(ACEdatetimeString, "1559767622")
 
 
-#Twitter prevents posting multiple status. Maybe I can return a date.
 def aceTrain_status():
-	api.PostUpdate('A C E Subway Status no longer on time')
+	api.PostUpdate(ACEdatetimeString)
 
 def oneTrain_status():
-	api.PostUpdate('1 2 3 Subway Status no longer on time')
+	api.PostUpdate(OnedatetimeString)
